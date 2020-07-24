@@ -97,26 +97,82 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        # check if robot is at the start of list (use "can move left")
-        
-        for i in range(len(self._list)-1):
-            # setup nested loop to compare adjacent cards (range of list minus i minus 1)
-            for j in range(len(self._list)-i-1):
-                # compare current card with card to robot's right
-                print('@@@@@', self.compare_item())
-                if self.compare_item() == 1:
-                    
-                    # if current card is greater, swap item
-                    self._list[j], self._list[j+1] = self._list[j+1], self._list[j]
-                    # move robot right comparing values at every index until robot can't move right
-                        
-
-
-                
-                
-                
-                
+    # Your code here
+    # turn light on (swapped boolean)
+        self.set_light_on()
+        # while loop while robot is able to move right
+        while self.light_is_on:
+            self.set_light_off()
             
+            # check if there is an index available to the right of the robots current position
+            while self.can_move_right():
+                # print('while can move right', self._position)
+                # robot needs to swap values with current index
+                self.swap_item()
+                # print('current item', self._item)
+                # move one index to the right
+                self.move_right()
+                # compare value on robot w/value at current position
+                # if self.compare_item() == -1:
+                #     # print('checking if held item < current item', self._item)
+                #     # if current item is less than positional value, move left
+                #     self.move_left()
+                #     # swap current item with positional value
+                #     self.swap_item()
+                #     # print('now holding', self._item)
+                #     # turn light on because we swapped value
+                if self.compare_item() == 1:
+                    # print('held item is greater than current', self._item)
+                    # swap items
+                    self.swap_item()
+                    self.set_light_on()
+                    # print('now holding',self._item)
+                self.move_left()
+                self.swap_item()
+                    # print('after drop',self._item)
+                self.move_right()
+                # print('&&&&&', self._position)
+            # when robot is all the way right
+            if not self.light_is_on():
+                break   
+            # self.set_light_off()    
+            while self.can_move_left():
+                # print('while can move left', self._position)
+                # robot needs to swap values with current index
+                self.swap_item()
+                # print('current item', self._item)
+                # move one index to the right
+                self.move_left()
+                # compare value on robot w/value at current position
+                # if self.compare_item() < 0:
+                #     # print('checking if held item < current item', self._item)
+                #     # if current item is less than positional value, move left
+                #     self.move_right()
+                #     # swap current item with positional value
+                #     self.swap_item()
+                #     # print('now holding', self._item)
+                #     # turn light on because we swapped value
+                if self.compare_item() == -1:
+                    # print('held item is greater than current', self._item)
+                    # swap items
+                    self.swap_item()
+                    self.set_light_on()
+                    # print('now holding',self._item)
+                self.move_right()
+                self.swap_item()
+                    # print('after drop',self._item)
+                    
+                self.move_left()
+                # print('&&&&&', self._position)
+                # print('here is the list', self._list)
+            # when robot is all the way right
+            if not self.light_is_on():
+                break       
+            
+        
+        
+                        
+  
 
 
 if __name__ == "__main__":
@@ -124,21 +180,8 @@ if __name__ == "__main__":
     # with `python robot_sort.py`
 
     l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
-
-    robot = SortingRobot(l)
+    m = [10,9,8,7,6,5,4,3,2,1]
+    robot = SortingRobot(m)
 
     robot.sort()
     print(robot._list)
-
-
-    # if not self.can_move_left():
-    #         # loop over the list 
-    #         for i in range(len(self._list)-1):
-    #             if self.compare_item() == 1:
-    #                 self.swap()
-    #             else: 
-    #                 if self.can_move_right():
-    #                     self.move_right()
-    #                 elif self.can_move_left():
-    #                     self.move_left()
-    #     return(self._list)

@@ -97,7 +97,26 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        # check if robot is at the start of list (use "can move left")
+        
+        for i in range(len(self._list)-1):
+            # setup nested loop to compare adjacent cards (range of list minus i minus 1)
+            for j in range(len(self._list)-i-1):
+                # compare current card with card to robot's right
+                print('@@@@@', self.compare_item())
+                if self.compare_item() == 1:
+                    
+                    # if current card is greater, swap item
+                    self._list[j], self._list[j+1] = self._list[j+1], self._list[j]
+                    # move robot right comparing values at every index until robot can't move right
+                        
+
+
+                
+                
+                
+                
+            
 
 
 if __name__ == "__main__":
@@ -110,3 +129,16 @@ if __name__ == "__main__":
 
     robot.sort()
     print(robot._list)
+
+
+    # if not self.can_move_left():
+    #         # loop over the list 
+    #         for i in range(len(self._list)-1):
+    #             if self.compare_item() == 1:
+    #                 self.swap()
+    #             else: 
+    #                 if self.can_move_right():
+    #                     self.move_right()
+    #                 elif self.can_move_left():
+    #                     self.move_left()
+    #     return(self._list)
